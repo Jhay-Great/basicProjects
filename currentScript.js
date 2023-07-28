@@ -238,6 +238,10 @@ btn1N100.addEventListener('click', function() {
   })
 })
 
+gameInfoBtn.addEventListener('click', showModal)
+popUpCloseBtn.addEventListener('click', closeModal)
+popUpOverlay.addEventListener('click', closeModal)
+
 
 
 
@@ -479,6 +483,3 @@ btn1N100.addEventListener('click', function() {
                               /*---------------------1 and 100---------------*/
 
 
-gameInfoBtn.addEventListener('click', showModal)
-popUpCloseBtn.addEventListener('click', closeModal)
-popUpOverlay.addEventListener('click', closeModal)
