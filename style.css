@@ -298,19 +298,19 @@ button {
     .secret-number {
         font-size: 4rem;
     }
-    .play-again {
-        display: none;
-    }
+    
     .dropdown-container {
         position: absolute;
         top: 0;
         left: 0;
-        width: 50%;
+        width: 60%;
         height: 100%;
-        background-color: #fff;
+        background-color: #67059bf0;
+        z-index: 2;
     }
     .range {
-        padding: 9px 5px;
+        padding: 29px 5px;
+        color: #fff;
     }
     .range:hover {
         border-bottom: none;
@@ -320,6 +320,11 @@ button {
         font-size: 1.5rem;
         font-weight: 100;
         position: initial;
+        
+    }
+    .dropdown-container:hover .range-dropdown {
+        background-color: initial;
+        backdrop-filter: initial;
     }
     .slider {
         display: none;
@@ -344,9 +349,23 @@ button {
     #left {
         width: 100%;
     }
-    .pAgain {
-        display: inline-block;
-        margin-left: 20px;
+    
+    .play-again {
+        position: absolute;
+        bottom: 17.6%;
+        right: 20%;
+    }
+    .check {
+        position: relative;
+        left: -100%;
+    }
+    .dbl-tap {
+        position: absolute;
+        bottom: 7.5%;
+        left: 8px;
+        width: 95%;
+        height: 9%;
+        /* outline: 2px solid red; */
     }
     .guesses {
         width: 100%;

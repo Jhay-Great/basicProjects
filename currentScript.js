@@ -126,6 +126,9 @@ btn1N20.addEventListener('click', function() {
   lastRangeValue = 20;
   subHeading.textContent = `between 1 and ${lastRangeValue}`;
   hiddenNumber.textContent = '?';
+  hiddenNumber.style.boxShadow = 'initial';
+  outputMsgDisplay('Start guessing...');
+
 
   inputFieldOn();
   btnCheckOn();
@@ -150,7 +153,7 @@ btn1N20.addEventListener('click', function() {
     scoreNum = 20;   //further examination
     scoreValue.textContent = scoreNum;
 
-    hiddenNumber.style.boxShadow = 'none';
+    hiddenNumber.style.boxShadow = 'initial';
 
     inputFieldOn();
     btnCheckOn();
@@ -166,6 +169,9 @@ btn1N50.addEventListener('click', function() {
   lastRangeValue = 50;
   subHeading.textContent = `between 1 and ${lastRangeValue}`;
   hiddenNumber.textContent = '?';
+  hiddenNumber.style.boxShadow = 'initial';
+  outputMsgDisplay('Start guessing...');
+
 
   inputFieldOn();
   btnCheckOn();
@@ -191,7 +197,7 @@ btn1N50.addEventListener('click', function() {
     scoreNum = 15;   //further examination
     scoreValue.textContent = scoreNum;
 
-    hiddenNumber.style.boxShadow = 'none';
+    hiddenNumber.style.boxShadow = 'initial';
 
     inputFieldOn();
     btnCheckOn();
@@ -206,6 +212,8 @@ btn1N100.addEventListener('click', function() {
   lastRangeValue = 100;
   subHeading.textContent = `between 1 and ${lastRangeValue}`;
   hiddenNumber.textContent = '?';
+  hiddenNumber.style.boxShadow = 'initial';
+  outputMsgDisplay('Start guessing...');
 
   inputFieldOn();
   btnCheckOn();
@@ -230,7 +238,7 @@ btn1N100.addEventListener('click', function() {
     scoreNum = 10;   //further examination
     scoreValue.textContent = scoreNum;
 
-    hiddenNumber.style.boxShadow = 'none';
+    hiddenNumber.style.boxShadow = 'initial';
 
     inputFieldOn();
     btnCheckOn();
@@ -243,9 +251,29 @@ popUpCloseBtn.addEventListener('click', closeModal)
 popUpOverlay.addEventListener('click', closeModal)
 
 
+const dblTap = document.querySelector('.dbl-tap');
+const jhgInitials = document.getElementById('JhG');
 
 
+/** slider functionality 
+ * will have to improve this.
+*/
+const rangeMenu = document.querySelector('.dropdown-container');
 
+const showAside = function() {
+    rangeMenu.classList.remove('slider');
+    jhgInitials.style.zIndex = '2';
+    
+  }
+  const closeAside = function() {
+    rangeMenu.classList.add('slider');
+}
+
+dblTap.addEventListener('dblclick', showAside);
+window.addEventListener('click', closeAside);
+
+checkBtnOff();
+inputBoxOff();
 
 
 

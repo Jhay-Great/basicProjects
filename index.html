@@ -39,7 +39,7 @@
             <input type="number" class="guesses">
             <section class="left-buttons">
                 <button class="check">Check</button>
-                <button class=" pAgain">Play again</button>
+                <div class=" dbl-tap"></div>
             </section>
         </section>
         <section id="right" class="bottomPart">
@@ -51,13 +51,15 @@
 
     <!-- necessary info / details -->
     <footer id="bottom">
-        <p>&copy; 2023 :) JayGreat :)</p>
+        <p id="JhG">&copy; 2023 :) JhayGreat :)</p>
         <button class="game-info">Game info</button>
         <section class="pop-up hidden">
             <p class="close-btn">&times;</p>
             <section class="info">
                 <h3>How to play</h3>
                 <p>This is a fun little game to put you to a test of how lucky you are at guessing. Guess the number range from three different levels. Each level with its own difficulty. Player's score starts at 20 and decreases per each wrong guess. Also your score determines the number of tries you have left so try not to hit 0😊. High score are recorded at the score game was won.</p>
+
+                <p>On small screens double click/tap on the space beneath the <em>Check</em> and <em>Play again</em> buttons to view the range menu and choose your range.</p>
                 
                 <p>This is based off a tutorial lesson from Jonas Schmedtmann and not my own ideas. However this has been improved upon based on my ideas and logic.</p>
                 </section>
@@ -65,6 +67,6 @@
         <p class="hidden blur"></p>
     </footer>
 
-    <script src="../script3.js"></script>
+    <script src="./currentScript.js"></script>
 </body>
 </html>
