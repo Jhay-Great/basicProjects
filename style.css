@@ -349,15 +349,20 @@ button {
     #left {
         width: 100%;
     }
-    
     .play-again {
-        position: absolute;
-        bottom: 17.6%;
-        right: 20%;
+        display: none;
     }
-    .check {
+    .left-buttons {
+        width: 100%;
+        display: flex;
+        justify-content: space-evenly;
+    }
+    /* .check {
         position: relative;
         left: -100%;
+    } */
+    .pAgain {
+        display: inline-block;
     }
     .dbl-tap {
         position: absolute;
@@ -415,6 +420,7 @@ button {
         margin: 0;
         /* background-color: blue; */
     } 
+    
 }
 
 

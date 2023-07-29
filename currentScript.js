@@ -5,6 +5,7 @@ const btn1N50 = document.getElementById("oneToFifty");
 const btn1N100 = document.getElementById("oneToHundred");
 const btnCheck = document.querySelector(".check");
 const btnPlayAgain = document.querySelector(".play-again");
+const btnPAgain = document.querySelector('.pAgain');
 
 const popUp = document.querySelector('.pop-up');
 const popUpOverlay = document.querySelector('.blur');
@@ -159,6 +160,23 @@ btn1N20.addEventListener('click', function() {
     btnCheckOn();
 
   })
+
+  //Play again functionality for small screens - refractor later
+  btnPAgain.addEventListener('click', function() {
+    randomDigits = Math.trunc(Math.random() * 20) + 1;
+    hiddenNumber.textContent = '?';
+
+    outputMsgDisplay('Start guessing...');
+
+    scoreNum = 20;   //further examination
+    scoreValue.textContent = scoreNum;
+
+    hiddenNumber.style.boxShadow = 'initial';
+
+    inputFieldOn();
+    btnCheckOn();
+
+  })
 })
 // btnPlayAgain.addEventListener('click', playAgain);
 
@@ -194,6 +212,23 @@ btn1N50.addEventListener('click', function() {
     outputMsgDisplay('Start guessing...');
 
     
+    scoreNum = 15;   //further examination
+    scoreValue.textContent = scoreNum;
+
+    hiddenNumber.style.boxShadow = 'initial';
+
+    inputFieldOn();
+    btnCheckOn();
+
+  })
+
+  //Play again functionality for small screens - refractor later
+  btnPAgain.addEventListener('click', function() {
+    randomDigits = Math.trunc(Math.random() * 50) + 1;
+    hiddenNumber.textContent = '?';
+
+    outputMsgDisplay('Start guessing...');
+
     scoreNum = 15;   //further examination
     scoreValue.textContent = scoreNum;
 
@@ -242,6 +277,22 @@ btn1N100.addEventListener('click', function() {
 
     inputFieldOn();
     btnCheckOn();
+  })
+
+  //Play again functionality for small screens - refractor later
+  btnPAgain.addEventListener('click', function() {
+    randomDigits = Math.trunc(Math.random() * 100) + 1;
+    hiddenNumber.textContent = '?';
+
+    outputMsgDisplay('Start guessing...');
+
+    scoreNum = 10;   //further examination
+    scoreValue.textContent = scoreNum;
+
+    hiddenNumber.style.boxShadow = 'initial';
+
+    inputFieldOn();
+    btnCheckOn();
 
   })
 })
@@ -272,8 +323,7 @@ const showAside = function() {
 dblTap.addEventListener('dblclick', showAside);
 window.addEventListener('click', closeAside);
 
-checkBtnOff();
-inputBoxOff();
+
 
 
 
