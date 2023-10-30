@@ -12,6 +12,9 @@ const popUpOverlay = document.querySelector(".blur");
 const popUpCloseBtn = document.querySelector(".close-btn");
 const gameInfoBtn = document.querySelector(".game-info");
 
+const dropdownContainer = document.querySelector(".dropdown-container");
+const gameContainer = document.querySelector(".game-level_container");
+
 //text variables
 const subHeading = document.querySelector("h2");
 const hiddenNumber = document.querySelector(".secret-number");
@@ -48,6 +51,22 @@ const btnPlayAgainOff = function () {
   btnPlayAgain.disabled = true;
 };
 
+// Switch between responsive screens
+const moveable = function() {
+
+  const arr = [...dropdownContainer.children];
+  window.innerWidth < 880 ? arr.map(ar => gameContainer.append(ar)) : arr.map(ar => dropdownContainer.append(ar));
+  
+  // if ((window.innerWidth < 880)) {
+  //   const arr = [...dropdownContainer.children];
+  //   arr.map(ar => gameContainer.append(ar));
+  // }
+  // if ((window.innerWidth > 880)) {
+  //   const arr = [...dropdownContainer.children];
+  //   arr.map(ar => dropdownContainer.append(ar));
+  // }
+}
+
 //text functionality
 const outputMsgDisplay = function (text) {
   outputMessage.textContent = text;
@@ -57,25 +76,53 @@ const outputMsgDisplay = function (text) {
 let showModal = function () {
   popUp.classList.remove("hidden");
   popUpOverlay.classList.remove("hidden");
+  moveable();
 };
 const closeModal = function () {
   popUp.classList.add("hidden");
   popUpOverlay.classList.add("hidden");
 };
 
+
+
+
+// display UI setup
+const displayUiSetup = function(range) {
+  lastRangeValue = range;
+  subHeading.textContent = `between 1 and ${lastRangeValue}`;
+  hiddenNumber.textContent = "?";
+  hiddenNumber.style.boxShadow = "initial";
+  outputMsgDisplay("Start guessing...");
+
+  inputFieldOn();
+  btnCheckOn();
+  btnPlayAgainOn();
+}
+
+// setting up game supporting functionalities
+const settingLogic = function(initialScore, initialHighScore) {
+  randomDigits = getRandomNumber(lastRangeValue);
+  console.log(lastRangeValue, randomDigits)
+  scoreNum = initialScore;
+  scoreValue.textContent = scoreNum;
+  highscoreNum = initialHighScore;
+  highScoreValue.textContent = initialHighScore;
+}
+
 // Generating random number
 const getRandomNumber = function (number) {
   return Math.trunc(Math.random() * number) + 1;
 };
 
-const playAgainFn = function () {
-  randomDigits = getRandomNumber(lastRangeValue);
+// Play again
+const playAgainFn = function (RangeValue, highScoreValue) {
+  randomDigits = getRandomNumber(RangeValue);
   hiddenNumber.textContent = "?";
 
   outputMsgDisplay("Start guessing...");
 
-  scoreNum = lastRangeValue;
-  scoreValue.textContent = scoreNum;
+  scoreNum = highScoreValue;
+  scoreValue.textContent = highScoreValue;
 
   hiddenNumber.style.boxShadow = "initial";
 
@@ -138,304 +185,92 @@ const compareResult = function () {
 //                               /*---------------------1 and 20---------------*/
 
 btn1N20.addEventListener("click", function () {
-  lastRangeValue = 20;
-  subHeading.textContent = `between 1 and ${lastRangeValue}`;
-  hiddenNumber.textContent = "?";
-  hiddenNumber.style.boxShadow = "initial";
-  outputMsgDisplay("Start guessing...");
+  displayUiSetup(20);
 
-  inputFieldOn();
-  btnCheckOn();
-  btnPlayAgainOn();
-
-  randomDigits = getRandomNumber(lastRangeValue);
-  scoreNum = lastRangeValue;
-  scoreValue.textContent = scoreNum;
-  highscoreNum = 0;
-  highScoreValue.textContent = 0;
+  settingLogic(lastRangeValue, 0);
 
   btnCheck.addEventListener("click", compareResult);
 
   // play again functionality for desktop version
-  btnPlayAgain.addEventListener("click", playAgainFn);
+  btnPlayAgain.addEventListener("click", playAgainFn.bind(null, lastRangeValue, scoreNum));
 
   //Play again functionality for small screens
-  btnPAgain.addEventListener("click", playAgainFn);
+  btnPAgain.addEventListener("click", playAgainFn.bind(null, lastRangeValue, scoreNum));
 });
 
 /*---------------------1 and 50---------------*/
 
 btn1N50.addEventListener("click", function () {
-  lastRangeValue = 50;
-  subHeading.textContent = `between 1 and ${lastRangeValue}`;
-  hiddenNumber.textContent = "?";
-  hiddenNumber.style.boxShadow = "initial";
-  outputMsgDisplay("Start guessing...");
+  displayUiSetup(50);
 
-  inputFieldOn();
-  btnCheckOn();
-  btnPlayAgainOn();
-
-  randomDigits = getRandomNumber(lastRangeValue);
-  scoreNum = 15;
-  scoreValue.textContent = scoreNum;
-  highscoreNum = 0;
-  highScoreValue.textContent = 0;
+  settingLogic(15, 0); 
 
   btnCheck.addEventListener("click", compareResult);
 
   //Play again functionality
-  btnPlayAgain.addEventListener("click", function () {
-    randomDigits = getRandomNumber(lastRangeValue);
-    hiddenNumber.textContent = "?";
+  btnPlayAgain.addEventListener("click", playAgainFn.bind(null, lastRangeValue, scoreNum));
 
-    outputMsgDisplay("Start guessing...");
-
-    scoreNum = 15; //further examination
-    scoreValue.textContent = scoreNum;
-
-    hiddenNumber.style.boxShadow = "initial";
-
-    inputFieldOn();
-    btnCheckOn();
-  });
-
-  //Play again functionality for small screens - refractor later
-  btnPAgain.addEventListener("click", function () {
-    randomDigits = getRandomNumber(lastRangeValue);
-    hiddenNumber.textContent = "?";
-
-    outputMsgDisplay("Start guessing...");
-
-    scoreNum = 15; //further examination
-    scoreValue.textContent = scoreNum;
-
-    hiddenNumber.style.boxShadow = "initial";
-
-    inputFieldOn();
-    btnCheckOn();
-  });
+  //Play again functionality for small screens 
+  btnPAgain.addEventListener("click", playAgainFn.bind(null, lastRangeValue, scoreNum));
 });
 
-//                               /*---------------------1 and 100---------------*/
+                                 /*---------------------1 and 100---------------*/
 
 btn1N100.addEventListener("click", function () {
-  lastRangeValue = 100;
-  subHeading.textContent = `between 1 and ${lastRangeValue}`;
-  hiddenNumber.textContent = "?";
-  hiddenNumber.style.boxShadow = "initial";
-  outputMsgDisplay("Start guessing...");
+  displayUiSetup(100);
 
-  inputFieldOn();
-  btnCheckOn();
-  btnPlayAgainOn();
-
-  randomDigits = Math.trunc(Math.random() * 100) + 1; //try put this in a function and set the multiplier to lastRangeNumber
-  scoreNum = 10;
-  scoreValue.textContent = scoreNum;
-  highscoreNum = 0;
-  highScoreValue.textContent = 0;
+  settingLogic(10, 0); 
 
   btnCheck.addEventListener("click", compareResult);
 
-  //Play again functionality - refractor later
-  btnPlayAgain.addEventListener("click", function () {
-    randomDigits = Math.trunc(Math.random() * 100) + 1;
-    hiddenNumber.textContent = "?";
+  //Play again functionality
+  btnPlayAgain.addEventListener("click", playAgainFn.bind(null, lastRangeValue, scoreNum))
 
-    outputMsgDisplay("Start guessing...");
-
-    scoreNum = 10; //further examination
-    scoreValue.textContent = scoreNum;
-
-    hiddenNumber.style.boxShadow = "initial";
-
-    inputFieldOn();
-    btnCheckOn();
-  });
-
-  //Play again functionality for small screens - refractor later
-  btnPAgain.addEventListener("click", function () {
-    randomDigits = Math.trunc(Math.random() * 100) + 1;
-    hiddenNumber.textContent = "?";
-
-    outputMsgDisplay("Start guessing...");
-
-    scoreNum = 10; //further examination
-    scoreValue.textContent = scoreNum;
-
-    hiddenNumber.style.boxShadow = "initial";
-
-    inputFieldOn();
-    btnCheckOn();
-  });
+  //Play again functionality for small screens
+  btnPAgain.addEventListener("click", playAgainFn.bind(null, lastRangeValue, scoreNum))
 });
 
 gameInfoBtn.addEventListener("click", showModal);
 popUpCloseBtn.addEventListener("click", closeModal);
 popUpOverlay.addEventListener("click", closeModal);
 
+
+
 // copying range into a new parent for mobile screens
-/**
- * popUp = new parent
- * dropdown-container = old parent
- */
-const dropdownContainer = document.querySelector(".dropdown-container");
-const gameContainer = document.querySelector(".game-level_container");
-const move = function () {
-  while (dropdownContainer.childNodes.length > 0) {
-    gameContainer.appendChild(dropdownContainer.childNodes[0]);
-  }
-};
+
+// const dropdownContainer = document.querySelector(".dropdown-container");
+// const gameContainer = document.querySelector(".game-level_container");
+// const move = function () {
+//   while (dropdownContainer.childNodes.length > 0) {
+//     gameContainer.appendChild(dropdownContainer.childNodes[0]);
+//   }
+// };
 
 /** using intersection observer */
-const fn = function (entries) {
-  const [entry] = entries;
-  console.log(entry);
-  if (entry.rootBounds.width < 880) move();
-};
-
-const windowObserver = new IntersectionObserver(fn, { root: null });
-windowObserver.observe(popUp);
-
-// const dblTap = document.querySelector(".dbl-tap");
-// const jhgInitials = document.getElementById("JhG");
-
-/** slider functionality
- * will have to improve this.
- */
-// const rangeMenu = document.querySelector(".dropdown-container");
-
-// const showAside = function () {
-//   rangeMenu.classList.remove("slider");
-//   jhgInitials.style.zIndex = "2";
-// };
-// const closeAside = function () {
-//   rangeMenu.classList.add("slider");
+// const fn = function (entries) {
+//   const [entry] = entries;
+//   console.log(entry);
+//   console.log(entry.rootBounds.width < 880);
+//   if (entry.rootBounds.width > 550) return;
+//   if (entry.rootBounds.width < 880) moveable();
 // };
 
-// dblTap.addEventListener("dblclick", showAside);
-// window.addEventListener("click", closeAside);
+// const windowObserver = new IntersectionObserver(fn, { root: null });
+// windowObserver.observe(popUp);
 
-// const rangeB = document.querySelectorAll('.between');
+// const moveable = function() {
 
-// const range = function() {
-//   for (let i = 0; i < rangeB; i++) {
-//     if (rangeB[i] == 0) return 20;
-//     else if (rangeB[i] == 1) return 50;
-//     else if (rangeB[i] == 2) return 100
-//   }
+//   const arr = [...dropdownContainer.children];
+//   window.innerWidth < 880 ? arr.map(ar => gameContainer.append(ar)) : arr.map(ar => dropdownContainer.append(ar));
+  
+//   // if ((window.innerWidth < 880)) {
+//   //   const arr = [...dropdownContainer.children];
+//   //   arr.map(ar => gameContainer.append(ar));
+//   // }
+//   // if ((window.innerWidth > 880)) {
+//   //   const arr = [...dropdownContainer.children];
+//   //   arr.map(ar => dropdownContainer.append(ar));
+//   // }
 // }
+// moveable(); 
 
-// rangeB.addEventListener('click', range);
-
-/**-------------------------------------------THE END----------------------------------------------------------------------- */
-
-// /**--------------------------------------------Event functionality------------------------------------------------ */
-//                               /*---------------------1 and 20---------------*/
-// btn1N20.addEventListener("click", function () {
-//   subHeading.textContent = "between 1 and 20";
-
-//   inputFieldOn();
-//   btnCheckOn();
-//   btnPlayAgainOn();
-
-//   //generating randomDigits
-//   let randomDigits;
-//   randomDigits = Math.trunc(Math.random() * 20) + 1;
-//   console.log(randomDigits);
-
-//   //Score and Highscore
-//   let scoreNum = 20;
-//   scoreValue.textContent = scoreNum;
-
-//   let highscoreNum = 0;
-//   highScoreValue.textContent = highscoreNum;
-
-//   //check button event
-//   btnCheck.addEventListener("click", function () {
-//     console.log('still running');
-//     let guessedNumber = Number(document.querySelector(".guesses").value);
-
-//     //when no guess or guess is out of range
-//     if (!guessedNumber || guessedNumber < 0 || guessedNumber > 20) {
-//       outputMsgDisplay("💥 Enter a number between 1 and 20");
-//       scoreNum--;
-//       scoreValue.textContent = scoreNum;
-//       if (scoreNum < 1) {
-//         outputMsgDisplay('😞 Game over')
-//         scoreNum = 0;
-//         scoreValue.textContent = scoreNum;
-//         btnCheckOff();
-//         inputFieldOff();
-//       }
-//     } //when guess is correct
-//     else if (guessedNumber === randomDigits) {
-//       outputMsgDisplay("🍾 Yayy!!! Correct number!");
-//       btnCheckOff();
-//       inputFieldOff();
-//       hiddenNumber.textContent = randomDigits;
-//       if (highscoreNum < scoreNum) {
-//         highscoreNum = scoreNum;
-//         highScoreValue.textContent = highscoreNum;
-//       }
-//     } //when guess is wrong
-//     else if (guessedNumber !== randomDigits) {
-//       outputMsgDisplay(
-//         guessedNumber > randomDigits ? "📈 Too high" : "📉 Too low"
-//       );
-//       scoreNum--;
-//       scoreValue.textContent = scoreNum;
-//       if (scoreNum < 1) {
-//         outputMsgDisplay('😞 Game over')
-//         scoreNum = 0;
-//         scoreValue.textContent = scoreNum;
-//         btnCheckOff();
-//         inputFieldOff();
-//       }
-//     }
-//   });
-
-//   btnPlayAgain.addEventListener("click", function () {
-//     randomDigits = Math.trunc(Math.random() * 20) + 1;
-//     hiddenNumber.textContent = '?';
-
-//     inputFieldOn();
-//     btnCheckOn();
-//     outputMsgDisplay('Start guessing...');
-
-//     scoreNum = 20;
-//     scoreValue.textContent = scoreNum;
-
-//     console.log(randomDigits + ' from 1 to 20');
-//   });
-// });
-
-//                               /*---------------------1 and 50---------------*/
-// btn1N50.addEventListener('click', function() {
-//   subHeading.textContent = "between 1 and 50";
-
-//   inputFieldOn();
-//   btnCheckOn();
-//   btnPlayAgainOn();
-
-//   //generating randomDigits
-//   let randomDigits;
-//   randomDigits = Math.trunc(Math.random() * 50) + 1;
-//   console.log(randomDigits);
-
-//   //Score and Highscore
-//   let scoreNum = 15;
-//   scoreValue.textContent = scoreNum;
-
-//   let highscoreNum = 0;
-//   highScoreValue.textContent = highscoreNum;
-
-//   //check button event
-//   btnCheck.addEventListener('click', function() {
-//     console.log('hi there');
-//   })
-//   console.log(scoreNum);
-// })
-
-/*---------------------1 and 100---------------*/

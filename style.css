@@ -287,6 +287,11 @@ button {
   justify-self: flex-start;
   cursor: pointer;
 }
+/* CLASS LISTS STYLES */
+.correct-guess {
+  box-shadow: rgb(7, 247, 43) -2px 5px 45px 5px;
+  border-radius: 20px;
+}
 
 .hidden {
   display: none;
