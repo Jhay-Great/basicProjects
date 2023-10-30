@@ -68,20 +68,20 @@ const getRandomNumber = function (number) {
   return Math.trunc(Math.random() * number) + 1;
 };
 
-const playAgainFn = function() {
+const playAgainFn = function () {
   randomDigits = getRandomNumber(lastRangeValue);
-    hiddenNumber.textContent = "?";
+  hiddenNumber.textContent = "?";
 
-    outputMsgDisplay("Start guessing...");
+  outputMsgDisplay("Start guessing...");
 
-    scoreNum = lastRangeValue; 
-    scoreValue.textContent = scoreNum;
+  scoreNum = lastRangeValue;
+  scoreValue.textContent = scoreNum;
 
-    hiddenNumber.style.boxShadow = "initial";
+  hiddenNumber.style.boxShadow = "initial";
 
-    inputFieldOn();
-    btnCheckOn();
-}
+  inputFieldOn();
+  btnCheckOn();
+};
 
 inputFieldOff();
 btnCheckOff();
@@ -161,7 +161,7 @@ btn1N20.addEventListener("click", function () {
 
   //Play again functionality for small screens
   btnPAgain.addEventListener("click", playAgainFn);
-})
+});
 
 /*---------------------1 and 50---------------*/
 
@@ -275,24 +275,47 @@ gameInfoBtn.addEventListener("click", showModal);
 popUpCloseBtn.addEventListener("click", closeModal);
 popUpOverlay.addEventListener("click", closeModal);
 
-const dblTap = document.querySelector(".dbl-tap");
-const jhgInitials = document.getElementById("JhG");
+// copying range into a new parent for mobile screens
+/**
+ * popUp = new parent
+ * dropdown-container = old parent
+ */
+const dropdownContainer = document.querySelector(".dropdown-container");
+const gameContainer = document.querySelector(".game-level_container");
+const move = function () {
+  while (dropdownContainer.childNodes.length > 0) {
+    gameContainer.appendChild(dropdownContainer.childNodes[0]);
+  }
+};
+
+/** using intersection observer */
+const fn = function (entries) {
+  const [entry] = entries;
+  console.log(entry);
+  if (entry.rootBounds.width < 880) move();
+};
+
+const windowObserver = new IntersectionObserver(fn, { root: null });
+windowObserver.observe(popUp);
+
+// const dblTap = document.querySelector(".dbl-tap");
+// const jhgInitials = document.getElementById("JhG");
 
 /** slider functionality
  * will have to improve this.
  */
-const rangeMenu = document.querySelector(".dropdown-container");
+// const rangeMenu = document.querySelector(".dropdown-container");
 
-const showAside = function () {
-  rangeMenu.classList.remove("slider");
-  jhgInitials.style.zIndex = "2";
-};
-const closeAside = function () {
-  rangeMenu.classList.add("slider");
-};
+// const showAside = function () {
+//   rangeMenu.classList.remove("slider");
+//   jhgInitials.style.zIndex = "2";
+// };
+// const closeAside = function () {
+//   rangeMenu.classList.add("slider");
+// };
 
-dblTap.addEventListener("dblclick", showAside);
-window.addEventListener("click", closeAside);
+// dblTap.addEventListener("dblclick", showAside);
+// window.addEventListener("click", closeAside);
 
 // const rangeB = document.querySelectorAll('.between');
 
