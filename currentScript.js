@@ -53,18 +53,8 @@ const btnPlayAgainOff = function () {
 
 // Switch between responsive screens
 const moveable = function() {
-
   const arr = [...dropdownContainer.children];
   window.innerWidth < 880 ? arr.map(ar => gameContainer.append(ar)) : arr.map(ar => dropdownContainer.append(ar));
-  
-  // if ((window.innerWidth < 880)) {
-  //   const arr = [...dropdownContainer.children];
-  //   arr.map(ar => gameContainer.append(ar));
-  // }
-  // if ((window.innerWidth > 880)) {
-  //   const arr = [...dropdownContainer.children];
-  //   arr.map(ar => dropdownContainer.append(ar));
-  // }
 }
 
 //text functionality
@@ -110,9 +100,7 @@ const settingLogic = function(initialScore, initialHighScore) {
 }
 
 // Generating random number
-const getRandomNumber = function (number) {
-  return Math.trunc(Math.random() * number) + 1;
-};
+const getRandomNumber = number => Math.trunc(Math.random() * number) + 1;
 
 // Play again
 const playAgainFn = function (RangeValue, highScoreValue) {
@@ -236,41 +224,5 @@ popUpOverlay.addEventListener("click", closeModal);
 
 
 
-// copying range into a new parent for mobile screens
 
-// const dropdownContainer = document.querySelector(".dropdown-container");
-// const gameContainer = document.querySelector(".game-level_container");
-// const move = function () {
-//   while (dropdownContainer.childNodes.length > 0) {
-//     gameContainer.appendChild(dropdownContainer.childNodes[0]);
-//   }
-// };
-
-/** using intersection observer */
-// const fn = function (entries) {
-//   const [entry] = entries;
-//   console.log(entry);
-//   console.log(entry.rootBounds.width < 880);
-//   if (entry.rootBounds.width > 550) return;
-//   if (entry.rootBounds.width < 880) moveable();
-// };
-
-// const windowObserver = new IntersectionObserver(fn, { root: null });
-// windowObserver.observe(popUp);
-
-// const moveable = function() {
-
-//   const arr = [...dropdownContainer.children];
-//   window.innerWidth < 880 ? arr.map(ar => gameContainer.append(ar)) : arr.map(ar => dropdownContainer.append(ar));
-  
-//   // if ((window.innerWidth < 880)) {
-//   //   const arr = [...dropdownContainer.children];
-//   //   arr.map(ar => gameContainer.append(ar));
-//   // }
-//   // if ((window.innerWidth > 880)) {
-//   //   const arr = [...dropdownContainer.children];
-//   //   arr.map(ar => dropdownContainer.append(ar));
-//   // }
-// }
-// moveable(); 
 
