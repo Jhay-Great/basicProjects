@@ -215,6 +215,11 @@ button {
   border: none;
   /* border-bottom: 2px solid #fff; */
 }
+.guesses:placeholder-shown {
+  font-size: 1.2rem;
+  letter-spacing: 1px;
+  word-spacing: 2px;
+}
 #right {
   width: 35rem;
   /* background-color: violet; */
